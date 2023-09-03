@@ -1,20 +1,15 @@
-import React from 'react';
-import { Loader } from 'react-feather';
+import React from "react";
+import { Loader } from "react-feather";
 
-import styles from './Spinner.module.css';
+import styles from "./Spinner.module.css";
 
-function Spinner({
-  color = 'black',
-  size = 24,
-  opacity = 0.5,
-  speed = 1200,
-}) {
+function Spinner({ color = "black", size = 24, opacity = 0.5, speed = 1200 }) {
   return (
     <span
       className={styles.wrapper}
       style={{
         opacity,
-        '--speed': `${speed}ms`,
+        "--speed": `${speed}ms`,
         width: size,
         height: size,
       }}
