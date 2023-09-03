@@ -3,14 +3,8 @@ import produce from "immer";
 function reducer(state, action) {
   return produce(state, (draftState) => {
     switch (action.type) {
-      case "initial-items": {
-        const savedItems = window.localStorage.getItem("cart-items");
-
-        if (savedItems === null) {
-          return [];
-        }
-
-        return JSON.parse(savedItems);
+      case "load-initial-items": {
+        return action.items;
       }
 
       case "add-item": {
@@ -18,7 +12,6 @@ function reducer(state, action) {
 
         if (itemIndex !== -1) {
           draftState[itemIndex].quantity += 1;
-          window.localStorage.setItem("cart-items", JSON.stringify(draftState));
           return;
         }
 
@@ -26,8 +19,6 @@ function reducer(state, action) {
           ...action.item,
           quantity: 1,
         });
-        window.localStorage.setItem("cart-items", JSON.stringify(draftState));
-
         return;
       }
 
@@ -35,7 +26,6 @@ function reducer(state, action) {
         const itemIndex = state.findIndex((item) => item.id === action.item.id);
 
         draftState.splice(itemIndex, 1);
-        window.localStorage.setItem("cart-items", JSON.stringify(draftState));
         return;
       }
     }

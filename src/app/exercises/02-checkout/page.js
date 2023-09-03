@@ -7,12 +7,23 @@ import StoreItem from "./StoreItem";
 import CheckoutFlow from "./CheckoutFlow";
 import "./styles.css";
 
-function CheckoutExercise() {
+function ExerciseOne() {
   const [items, dispatch] = React.useReducer(reducer, null);
 
   React.useEffect(() => {
-    dispatch({ type: "initial-items" });
-  }, [dispatch]);
+    const savedItems = window.localStorage.getItem("cart-items");
+
+    if (savedItems !== null) {
+      dispatch({
+        type: "load-initial-items",
+        items: savedItems !== null ? JSON.parse(savedItems) : [],
+      });
+    }
+  }, []);
+
+  React.useEffect(() => {
+    window.localStorage.setItem("cart-items", JSON.stringify(items));
+  }, [items]);
 
   return (
     <>
@@ -49,4 +60,4 @@ function CheckoutExercise() {
   );
 }
 
-export default CheckoutExercise;
+export default ExerciseOne;

@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
 
+import Spinner from "../../../components/Spinner";
 import CartTable from "./CartTable";
-import Spinner from "../../../components/Spinner/Spinner";
 
-function CheckoutFlow({ items, taxRate, handleDeleteItem }) {
+function CheckoutFlow({ items, status, taxRate, handleDeleteItem }) {
   if (items === null) {
     return (
       <div className="checkout-flow empty">
@@ -12,7 +12,6 @@ function CheckoutFlow({ items, taxRate, handleDeleteItem }) {
       </div>
     );
   }
-
   if (items.length === 0) {
     return (
       <div className="checkout-flow empty">
